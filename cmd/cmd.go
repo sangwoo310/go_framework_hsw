@@ -1,6 +1,16 @@
 package cmd
 
-import "github.com/urfave/cli/v2"
+import (
+	"fmt"
+	"github.com/urfave/cli/v2"
+)
+
+type CmdInterface interface {
+	SetCommand() error
+
+	Build() error
+
+}
 
 type CmdStruct struct {
 	Name			string
@@ -12,10 +22,32 @@ type CmdStruct struct {
 	Flags			[]*cli.Flag
 }
 
-var cmd []*cli.Command
+//var cmd []*cli.Command
+
+type App2 struct {
+	app2 *cli.App
+}
+
+func NewApp() *CmdStruct {
+	return &CmdStruct{}
+}
+
+func (c CmdStruct)SetCommand(cmd *CmdInterface) error {
+	//cmd :=
+	return nil
+}
+
+func (c CmdStruct)Build() error {
+	fmt.Print("this is build function")
+
+	//app := &cli.App{
+	//	Commands: ,
+	//}
+	//
+	//if err := app.Run(os.Args); err != nil {
+	//	return err
+	//}
 
 
-
-func Build()  {
-
+	return nil
 }
