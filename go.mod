@@ -1,4 +1,4 @@
-module go_framework_hsw
+module github.com/sangwoo310/go_framework_hsw
 
 go 1.13
 
