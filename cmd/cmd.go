@@ -11,6 +11,7 @@ type SCmd struct {
 	UsageText		string
 	Description		string
 	Category		string
+	Action			cli.ActionFunc
 	SubCommands		[]*cli.Command
 	// Flag 구조체 생성 및 변경 필요?
 	Flags			[]cli.Flag
@@ -36,6 +37,7 @@ func (c SCmd) AddCommand() (*cli.App, error) {
 		UsageText:   	c.UsageText,
 		Description: 	c.Description,
 		Category:    	c.Category,
+		Action:			c.Action,
 		Subcommands:	c.SubCommands,
 		Flags:			c.Flags,
 	}
@@ -53,6 +55,7 @@ func (c SCmd) AddCommands(sc ...SCmd) (*cli.App, error) {
 			UsageText:   	rsc.UsageText,
 			Description: 	rsc.Description,
 			Category:    	rsc.Category,
+			Action:			c.Action,
 			Subcommands:	rsc.SubCommands,
 			Flags:			rsc.Flags,
 		}

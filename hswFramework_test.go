@@ -2,7 +2,9 @@ package hswFramework
 
 import (
 	"fmt"
+	"github.com/sangwoo310/go_framework_hsw/cmd"
 	"github.com/spf13/cobra"
+	"github.com/urfave/cli/v2"
 	"strings"
 	"testing"
 )
@@ -70,4 +72,23 @@ func TestInterface(t *testing.T)  {
 	//// 클래스 함수를 사용가능
 	//ci2 := &cmd.CmdStruct{}
 	//ci2.InterTest()
+}
+
+func TestCmdAddCommand(t *testing.T)  {
+	q := cmd.SCmd{
+		Name:        "",
+		Usage:       "",
+		UsageText:   "",
+		Description: "",
+		Category:    "",
+		Action:      scTe,
+		SubCommands: nil,
+		Flags:       nil,
+	}
+
+	fmt.Println(q)
+}
+
+func scTe(ctx *cli.Context) error {
+	return nil
 }
