@@ -60,14 +60,14 @@ func qq(cmd *cobra.Command, args []string) {
 }
 
 func init() {
-	Commands := &[]cobra.Command{
-		{
-			Use:   "flag",
-			Short: "flag1",
-			Long: `example for flag option`,
-			Args: cobra.MinimumNArgs(0),
-			Run: qq,
-		},
+}
 
-	}
+func TestInterface(t *testing.T)  {
+	//// 인터페이스 함수로 강제함
+	//var ci cmd.CmdInterface = &cmd.CmdStruct{}
+	//ci.SetCommand()
+	//
+	//// 클래스 함수를 사용가능
+	//ci2 := &cmd.CmdStruct{}
+	//ci2.InterTest()
 }

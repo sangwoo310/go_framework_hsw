@@ -5,49 +5,67 @@ import (
 	"github.com/urfave/cli/v2"
 )
 
-type CmdInterface interface {
-	SetCommand() error
-
-	Build() error
-
-}
-
-type CmdStruct struct {
+type SCmd struct {
 	Name			string
 	Usage			string
 	UsageText		string
 	Description		string
 	Category		string
 	SubCommands		[]*cli.Command
-	Flags			[]*cli.Flag
+	// Flag 구조체 생성 및 변경 필요?
+	Flags			[]cli.Flag
 }
 
-//var cmd []*cli.Command
+var app cli.App
 
-type App2 struct {
-	app2 *cli.App
+func init() {
+	app = *cli.NewApp()
 }
 
-func NewApp() *CmdStruct {
-	return &CmdStruct{}
+func (c SCmd) TestMethod(s string) (string, error) {
+	fmt.Println("Message is : ", s)
+	str := "TestMethod Cmd Function Start : " + s
+
+	return str, nil
 }
 
-func (c CmdStruct)SetCommand(cmd *CmdInterface) error {
-	//cmd :=
-	return nil
+func (c SCmd) AddCommand() (*cli.App, error) {
+	castCmd := cli.Command{
+		Name:        	c.Name,
+		Usage:       	c.Usage,
+		UsageText:   	c.UsageText,
+		Description: 	c.Description,
+		Category:    	c.Category,
+		Subcommands:	c.SubCommands,
+		Flags:			c.Flags,
+	}
+
+	_ = append(app.Commands, &castCmd)
+
+	return &app, nil
 }
 
-func (c CmdStruct)Build() error {
-	fmt.Print("this is build function")
+func (c SCmd) AddCommands(sc ...SCmd) (*cli.App, error) {
+	for _, rsc := range sc {
+		castCmd := cli.Command{
+			Name:        	rsc.Name,
+			Usage:       	rsc.Usage,
+			UsageText:   	rsc.UsageText,
+			Description: 	rsc.Description,
+			Category:    	rsc.Category,
+			Subcommands:	rsc.SubCommands,
+			Flags:			rsc.Flags,
+		}
 
-	//app := &cli.App{
-	//	Commands: ,
-	//}
-	//
-	//if err := app.Run(os.Args); err != nil {
-	//	return err
-	//}
+		_ = append(app.Commands, &castCmd)
+	}
 
+	return &app, nil
+}
 
-	return nil
+func (c SCmd) Build() (string, error) {
+	str := "Build Cmd Function Start"
+
+	return str, nil
+
 }

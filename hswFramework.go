@@ -2,26 +2,28 @@ package hswFramework
 
 import "github.com/sangwoo310/go_framework_hsw/cmd"
 
-type HswFrame interface {
-	Cmd()
+type IFrame interface {
+	Cmd() *cmd.SCmd
 }
 
-type SHswFrame struct {
-	Frame *HswFrame
+type SFrame struct {
+	Name string
 }
 
-//func NewFrame() *SHswFrame {
+func NewApp() IFrame {
+	var framework IFrame = &SFrame{}
+
+	return framework
+}
+
+func (f SFrame) Cmd() *cmd.SCmd {
+	return &cmd.SCmd{}
+}
+
+
+//func (f SFrame) Cmd() *cmd.CmdInterface {
+//	var s cmd.CmdInterface = &cmd.CmdStruct{}
 //
-//	return &SHswFrame{}
+//	return &s
 //}
 
-func NewFrame() *SHswFrame {
-
-	return &SHswFrame{}
-}
-
-func (h SHswFrame) Cmd() *cmd.CmdStruct {
-	s := cmd.NewApp()
-
-	return s
-}
